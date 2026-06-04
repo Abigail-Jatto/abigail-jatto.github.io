@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abigail Jatto — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --surface: #f7f6f3;
+  --border: #e8e4de;
+  --ink: #1a1a1a;
+  --muted: #717070;
+  --accent: #2b5ce6;
+  --accent-light: #eef2fd;
+  --tag-bg: #f0ede8;
+  --tag-text: #4a4845;
+  --nav-h: 64px;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw; z-index: 100;
+}
+.nav-name { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--nav-h) + 4rem) 5vw 5rem;
+  max-width: 860px;
+}
+.hero-greeting {
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+.hero h1 {
+  font-family: 'Lora', serif; font-weight: 400;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.15; color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.hero h1 span { font-style: italic; }
+.hero-bio {
+  font-size: 1.05rem; line-height: 1.8; color: var(--muted);
+  max-width: 56ch; margin-bottom: 2.5rem;
+}
+.hero-bio strong { color: var(--ink); font-weight: 500; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.4rem; font-size: 0.85rem; font-weight: 500;
+  border-radius: 6px; text-decoration: none; transition: all 0.2s; cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: #fff; border: 1.5px solid var(--accent); }
+.btn-primary:hover { background: #1e4bcc; border-color: #1e4bcc; }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--ink); }
+.socials { display: flex; gap: 0.75rem; margin-top: 3rem; }
+.social-link {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+  color: var(--muted); text-decoration: none; font-size: 0.75rem; font-weight: 600;
+  transition: all 0.2s;
+}
+.social-link:hover { border-color: var(--ink); color: var(--ink); }
+.social-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ── SECTIONS ── */
+section { padding: 5rem 5vw; border-top: 1px solid var(--border); }
+.section-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+}
+.section-heading {
+  font-family: 'Lora', serif; font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.section-sub { font-size: 0.95rem; color: var(--muted); max-width: 52ch; margin-bottom: 3rem; line-height: 1.7; }
+
+/* ── SKILLS STRIP ── */
+.skills-strip { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+.skill-tag {
+  background: var(--tag-bg); color: var(--tag-text);
+  font-size: 0.78rem; font-weight: 500; padding: 0.35rem 0.9rem;
+  border-radius: 20px; border: 1px solid var(--border);
+}
+
+/* ── FEATURED PROJECT ── */
+.featured-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; margin-bottom: 2rem;
+}
+.featured-visual {
+  background: linear-gradient(135deg, #1a2744 0%, #2b5ce6 100%);
+  min-height: 320px; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 2rem;
+  position: relative; overflow: hidden;
+}
+.featured-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.featured-badge {
+  background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 0.3rem 0.8rem;
+  border-radius: 4px; width: fit-content; margin-bottom: 1rem;
+  position: relative;
+}
+.featured-stat-row { display: flex; gap: 2rem; position: relative; }
+.fstat-num { font-family: 'Lora', serif; font-size: 2rem; color: #fff; line-height: 1; }
+.fstat-label { font-size: 0.7rem; color: rgba(255,255,255,0.6); margin-top: 0.2rem; }
+
+.featured-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+.featured-type {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+}
+.featured-title {
+  font-family: 'Lora', serif; font-weight: 400;
+  font-size: 1.5rem; color: var(--ink); margin-bottom: 0.75rem; line-height: 1.3;
+}
+.featured-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.75rem; }
+.tag {
+  font-size: 0.72rem; font-weight: 500; padding: 0.28rem 0.7rem;
+  background: var(--tag-bg); color: var(--tag-text);
+  border-radius: 4px; border: 1px solid var(--border);
+}
+.findings-list { list-style: none; margin-bottom: 1.75rem; }
+.findings-list li {
+  font-size: 0.85rem; color: var(--muted);
+  padding: 0.4rem 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5;
+}
+.findings-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+.card-links { display: flex; gap: 0.75rem; }
+
+/* ── OTHER PROJECTS ── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.project-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column;
+}
+.project-card:hover { border-color: #c5c0b8; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.project-type {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+}
+.project-title { font-family: 'Lora', serif; font-weight: 400; font-size: 1.05rem; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.35; }
+.project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 1.25rem; }
+.project-link {
+  font-size: 0.8rem; font-weight: 500; color: var(--accent);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.project-link:hover { text-decoration: underline; }
+.project-link svg { width: 12px; height: 12px; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.about-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+.about-text p strong { color: var(--ink); font-weight: 500; }
+.education-block { margin-top: 1.5rem; }
+.edu-item { padding: 1rem 0; border-top: 1px solid var(--border); }
+.edu-degree { font-weight: 500; font-size: 0.9rem; color: var(--ink); }
+.edu-school { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
+.skills-section h3 {
+  font-family: 'Lora', serif; font-weight: 400; font-size: 1rem;
+  color: var(--ink); margin-bottom: 0.75rem; margin-top: 1.5rem;
+}
+.skills-section h3:first-child { margin-top: 0; }
+
+/* ── CONTACT ── */
+.contact-inner {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 3rem; max-width: 600px;
+}
+.contact-inner p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+.contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.9rem; color: var(--ink); text-decoration: none;
+  padding: 0.75rem 1rem; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 8px;
+  transition: border-color 0.2s;
+}
+.contact-link:hover { border-color: var(--accent); color: var(--accent); }
+.contact-link svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+.contact-link span { font-weight: 500; }
+.contact-link small { color: var(--muted); font-size: 0.8rem; margin-left: auto; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem 5vw;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+footer p { font-size: 0.8rem; color: var(--muted); }
+footer a { color: var(--muted); text-decoration: none; font-size: 0.8rem; }
+footer a:hover { color: var(--ink); }
+
+/* ── FADE IN ── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.on { opacity: 1; transform: none; }
+
+@media (max-width: 780px) {
+  .featured-card { grid-template-columns: 1fr; }
+  .featured-visual { min-height: 200px; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-links { gap: 1.25rem; }
+}
+@media (max-width: 500px) {
+  .nav-links li:nth-child(3) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Abigail Jatto</a>
+  <ul class="nav-links">
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-greeting">Hi, I'm Abigail</p>
+  <h1>Data <span>Scientist</span></h1>
+  <p class="hero-bio">
+    <strong style="color:var(--ink)">I am a Data Scientist with a background in biochemistry, pharmaceutical quality assurance and customer analytics, currently completing an MSc in Artificial Intelligence and Data Science at the University of Hull. I have hands-on experience building machine learning pipelines, deep learning models and data visualisations across real-world datasets spanning road safety, healthcare, NLP and customer behaviour. My work spans the full data science workflow, from cleaning and analysis through to modelling, forecasting and communicating findings to technical and non-technical audiences. I have contributed to measurable outcomes including a 30% improvement in business growth, a 96.7% accurate churn classifier, and multi-domain recommendations drawn from 370,000 UK road accident records. I bring a rigorous, evidence-driven approach shaped by experience in regulated pharmaceutical environments, academic research and fast-moving technology organisations.</strong>
+  </p>
+  <div class="hero-cta">
+    <a href="https://github.com/Abigail-Jatto" target="_blank" class="btn btn-primary">View my work ↗</a>
+  </div>
+
+</header>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label reveal">Projects</p>
+  <h2 class="section-heading reveal">Selected work</h2>
+  <p class="section-sub reveal">Analyses and dashboards across road safety, customer behaviour, and business performance.</p>
+
+  <!-- FEATURED: UK Traffic -->
+  <div class="featured-card reveal">
+    <div class="featured-visual" style="background: url('accident.jpg') center/cover no-repeat; position: relative;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,20,60,0.85) 0%, rgba(10,20,60,0.2) 60%, transparent 100%);"></div>
+      <div style="position:relative;">
+        <div class="featured-badge">Featured project</div>
+        <div class="featured-stat-row">
+          <div>
+            <div class="fstat-num">370K</div>
+            <div class="fstat-label">accident records</div>
+          </div>
+          <div>
+            <div class="fstat-num">7</div>
+            <div class="fstat-label">analyses</div>
+          </div>
+          <div>
+            <div class="fstat-num">3</div>
+            <div class="fstat-label">years of data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="featured-body">
+      <p class="featured-type">Python · Data Science</p>
+      <h3 class="featured-title">UK Road Traffic Accident Analysis (2017 to 2019)</h3>
+      <p class="featured-desc">
+        Analysed 370,153 DfT STATS19 accident records to uncover the conditions and patterns driving UK road accidents, using temporal analysis, geospatial clustering, association rule mining, and time series forecasting.
+      </p>
+      <div class="tag-row">
+        <span class="tag">DBSCAN</span>
+        <span class="tag">SARIMA</span>
+        <span class="tag">Apriori</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">statsmodels</span>
+        <span class="tag">pandas</span>
+      </div>
+      <ul class="findings-list">
+        <li>Serious accidents associate with fine weather &amp; dry roads, not bad conditions</li>
+        <li>Peak risk: 08:00 and 15:00 to 18:00 weekdays (commuting, not weather)</li>
+        <li>Bradford &amp; Leeds identified as top West Yorkshire accident hotspots</li>
+      </ul>
+      <div class="card-links">
+        <a href="https://github.com/Abigail-Jatto/Uk-traffic-accident" target="_blank" class="btn btn-primary" style="font-size:0.8rem; padding:0.55rem 1.1rem;">View on GitHub ↗</a>
+        <a href="https://github.com/Abigail-Jatto/Uk-traffic-accident/blob/main/uk_travel_accident.ipynb" target="_blank" class="btn btn-ghost" style="font-size:0.8rem; padding:0.55rem 1.1rem;">Notebook ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTHER PROJECTS GRID -->
+  <div class="projects-grid reveal">
+
+    <div class="project-card">
+      <p class="project-type">Excel · Data Visualization</p>
+      <h3 class="project-title">Coffee Sales Dashboard</h3>
+      <p class="project-desc">Analysed sales data across multiple coffee stores using Excel, identifying highest performing stores, top products, and seasonal trends.</p>
+      <div class="tag-row" style="margin-bottom:1rem">
+        <span class="tag">Excel</span><span class="tag">Dashboard</span><span class="tag">Sales Analysis</span>
+      </div>
+      <a href="https://medium.com/@jattoabigail548/coffee-sales-dashboard-abcf62fa562b" target="_blank" class="project-link">
+        Read article
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 11L11 1M11 1H4M11 1v7"/></svg>
+      </a>
+    </div>
+
+    <div class="project-card">
+      <p class="project-type">Power BI · Customer Analytics</p>
+      <h3 class="project-title">Databel Customer Churn Analysis</h3>
+      <p class="project-desc">Analysed Databel customer data using Power BI to identify churn drivers and surface growth opportunities with actionable recommendations.</p>
+      <div class="tag-row" style="margin-bottom:1rem">
+        <span class="tag">Power BI</span><span class="tag">Churn</span><span class="tag">Segmentation</span>
+      </div>
+      <a href="https://app.powerbi.com/reportEmbed?reportId=c64582c7-1667-4ffc-91af-f2a7587f820a&autoAuth=true&ctid=f8f694ce-2752-4217-ac12-8625c3ce6c05" target="_blank" class="project-link">
+        View dashboard
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 11L11 1M11 1H4M11 1v7"/></svg>
+      </a>
+    </div>
+
+    <div class="project-card">
+      <p class="project-type">SQL · Data Cleaning</p>
+      <h3 class="project-title">Film Dataset Cleaning</h3>
+      <p class="project-desc">Duplicated, cleaned, and prepared a films dataset for downstream analysis, handling missing values, inconsistent formats, and data quality issues in SQL.</p>
+      <div class="tag-row" style="margin-bottom:1rem">
+        <span class="tag">SQL</span><span class="tag">Data Cleaning</span><span class="tag">ETL</span>
+      </div>
+      <a href="https://github.com/Abigail-Jatto/Film-Data-cleaning/tree/main" target="_blank" class="project-link">
+        View on GitHub
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 11L11 1M11 1H4M11 1v7"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label reveal">About</p>
+  <h2 class="section-heading reveal">A little about me</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Every company needs a resilient, driven person, someone who never stops until the goal is achieved. <strong>That's me.</strong> After proactively self-learning data analytics, I enrolled in a <strong>Masters in Artificial Intelligence and Data Science</strong> to deepen my technical expertise.</p>
+      <p>I build dashboards, run customer segmentation, and help decision makers understand retention, churn, and growth opportunities. My experience in fast-paced service environments has sharpened my ability to think quickly, communicate with stakeholders, and optimise processes through data driven decisions.</p>
+      <div class="education-block">
+        <div class="edu-item">
+          <p class="edu-degree">MSc Artificial Intelligence &amp; Data Science</p>
+          <p class="edu-school">In progress · current studies</p>
+        </div>
+        <div class="edu-item">
+          <p class="edu-degree">Self-taught Data Analytics</p>
+          <p class="edu-school">Excel · SQL · Power BI · Python</p>
+        </div>
+      </div>
+    </div>
+    <div class="skills-section reveal">
+      <h3>Tools &amp; languages</h3>
+      <div class="skills-strip">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Jupyter Notebook</span>
+        <span class="skill-tag">pandas</span>
+        <span class="skill-tag">numpy</span>
+        <span class="skill-tag">matplotlib</span>
+        <span class="skill-tag">seaborn</span>
+        <span class="skill-tag">scikit-learn</span>
+        <span class="skill-tag">statsmodels</span>
+      </div>
+      <h3>Analysis skills</h3>
+      <div class="skills-strip">
+        <span class="skill-tag">Time series forecasting</span>
+        <span class="skill-tag">Clustering</span>
+        <span class="skill-tag">Association rules</span>
+        <span class="skill-tag">EDA</span>
+        <span class="skill-tag">Dashboard design</span>
+        <span class="skill-tag">Customer segmentation</span>
+        <span class="skill-tag">Churn analysis</span>
+        <span class="skill-tag">Data cleaning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label reveal">Contact</p>
+  <h2 class="section-heading reveal">Get in touch</h2>
+  <div class="contact-inner reveal">
+    <p>I'm open to data analyst roles, collaborations, and interesting projects. Feel free to reach out on any of the platforms below.</p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/abigail-jatto/" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <span>LinkedIn</span>
+        <small>abigail-jatto</small>
+      </a>
+      <a href="https://github.com/Abigail-Jatto" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        <span>GitHub</span>
+        <small>Abigail-Jatto</small>
+      </a>
+      <a href="https://medium.com/@jattoabigail548" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+        <span>Medium</span>
+        <small>@jattoabigail548</small>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Abigail Jatto · Data Analyst</p>
+  <a href="https://github.com/Abigail-Jatto" target="_blank">github.com/Abigail-Jatto</a>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 0.08 + 's';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
